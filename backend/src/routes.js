@@ -9,9 +9,9 @@ const ProfileController = require('./controllers/ProfileController');
 const SessionController = require('./controllers/SessionController');
 
 routes.post('/sessions', celebrate({
-    [Segments.HEADERS]: Joi.object({
-        authorization: Joi.string().required()
-    }).unknown(),
+    [Segments.BODY]: Joi.object().keys({
+        id: Joi.string().required(),
+    }),
 }), SessionController.create);
 
 routes.get('/ongs', OngController.index);
@@ -27,17 +27,14 @@ routes.post('/ongs', celebrate({
 
 routes.get('/profile', celebrate({
     [Segments.HEADERS]: Joi.object({
-        authorization: Joi.string().required()
+        authorization: Joi.string().required(),
     }).unknown(),
 }), ProfileController.index);
 
 routes.get('/incidents', celebrate({
     [Segments.QUERY]: Joi.object().keys({
         page: Joi.number(),
-    }),
-    [Segments.HEADERS]: Joi.object({
-        authorization: Joi.string().required(),
-    }).unknown(),
+    })
 }), IncidentController.index);
 
 routes.post('/incidents', celebrate({
@@ -45,7 +42,7 @@ routes.post('/incidents', celebrate({
         authorization: Joi.string().required()
     }).unknown(),
     [Segments.BODY]: Joi.object().keys({
-        title: Joi.string().require().min(1),
+        title: Joi.string().required().min(1),
         description: Joi.string().required().min(10),
         value: Joi.number().required().min(1),
     }),
