@@ -10,6 +10,4 @@ app.use(express.json()); //Setando o padrão de comunicação das requests
 app.use(routes); //configuração de rotas
 app.use(errors());
 
-
-
-app.listen(3333);
+module.exports = app;
