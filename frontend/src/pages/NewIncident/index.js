@@ -62,7 +62,8 @@ export default function NewIncident(){
                         placeholder="Valor em reais" 
                         value={value}
                         onChange={e => setValue(e.target.value)}
-                    />D                    <button className="button" type="submit">Cadastrar</button>
+                    />                    
+                    <button className="button" type="submit">Cadastrar</button>
                 </form>
             </div>
         </div>
